@@ -20,6 +20,7 @@
             background-color: #888888;
     }
     table, th, td {
+   /* border-collapse: collapse;*/ 
   border: 1px solid black;
   border-collapse: collapse;
 }
@@ -63,7 +64,7 @@
 
     <div>
         <h2>Imagens</h2>
-        <img src="./bolo-caseiro (1).jpg" alt="Imagem de um bolo de laranja"> 
+        <img src="" alt="SEM IMAGEM"> 
     </div>
     <div>
         <h2>Tabela</h2>
@@ -79,6 +80,28 @@
                 <td> UFSC</td>
             </tr>
         </table>
+    </div>
+   <!-- div>h2{formularios}+input*2 -->
+    <div>
+        <h2>formularios</h2>
+        <p>Formulario sobre assunto</p>
+    <div>
+        <label for="nomeusuario">Nome</label>
+        <input id = "nomeusuario" type="text">
+        <br>
+        <label for="emailusuario">Email</label>        
+        <input id = "emailusuario" type="email">
+        <br>
+        <label for="endereçousuario">Endereço</label>        
+        <input id = "endereçousuario" type="text">
+        <br>
+        <label for="Corusuario">Cor</label>        
+        <input id = "Corusuario" type="color">
+        <br>
+        <label for="datanasc">Data de nascimento</label>        
+        <input id = "datanasc" type="date">
+    </div>
+
     </div>
     </body>
 </html>
