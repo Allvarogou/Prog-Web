@@ -83,25 +83,48 @@
     </div>
    <!-- div>h2{formularios}+input*2 -->
     <div>
-        <h2>formularios</h2>
-        <p>Formulario sobre assunto</p>
-    <div>
-        <label for="nomeusuario">Nome</label>
-        <input id = "nomeusuario" type="text">
+        <h2>Formulários</h2>
+  <p>Formulário sobre assunto</p>
+
+  <div class="form-container">
+    <form action="">
+      <label for="nomeusuario">Nome</label>
+      <input id="nomeusuario" type="text" placeholder="Digite seu nome completo">
         <br>
-        <label for="emailusuario">Email</label>        
-        <input id = "emailusuario" type="email">
+      <label for="emailusuario">Email</label>
+      <input id="emailusuario" type="email" placeholder="email@gmail.com">
         <br>
-        <label for="endereçousuario">Endereço</label>        
-        <input id = "endereçousuario" type="text">
+      <label for="endereçousuario">Endereço</label>
+      <input id="endereçousuario" type="text" placeholder="Rua, número, bairro">
         <br>
-        <label for="Corusuario">Cor</label>        
-        <input id = "Corusuario" type="color">
+      <label for="Corusuario">Cor</label>
+      <input id="Corusuario" type="color">
         <br>
-        <label for="datanasc">Data de nascimento</label>        
-        <input id = "datanasc" type="date">
-    </div>
+      <label for="datanasc">Data de nascimento</label>
+      <input id="datanasc" type="date">
+        <br>
+      <label for="observacoes">Observações</label>
+      <textarea id="observacoes" rows="5" placeholder="Digite suas observações aqui..."></textarea>
+        <br>
+      <input type="button" value="Enviar">
+    </form>
+
+    <form action="https://google.com/search" method="GET"> <!-- Tem o metodo post tmb, porem não funcionan no google. Mas é o ideal para senhas -->
+        <h2>Busca</h2>
+        <label for="key"> Entre com termo</label>
+        <input type="text" id="key" name="q">
+        <button>Buscar</button>
+    </form>
+  </div>
 
     </div>
+    <iframe 
+  src="https://rbeninca.github.io/notas/pdm.html" 
+  width="100%" 
+  height="600px" 
+  frameborder="0">
+</iframe>
+<a href="pagina3.html">pagina3</a>
+
     </body>
 </html>
