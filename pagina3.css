@@ -6,3 +6,7 @@ p{
 #tituloCss1{
     background-color: azure;
 }
+
+[for = "name"], [type = "submit"]{
+    color: magenta;
+}
