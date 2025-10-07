@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button type="button" onclick="exibirTipos()">Exibir</button>
+    <p id="pString"></p>
+    <p id="pNumber"></p>
+    <p id="pBoolean"></p>
+    <p id="pUndefined"></p>
+    <p id="pNull"></p>
+    <p id="pObject"></p>
+    <p id="pArray"></p>
+</body>
+
+<script>
+    function exibirTipos(){
+        const varString = 'Olá mundo';
+        const varNumber = 10
+        const varBoolean = false;
+        const varUndefined = undefined;
+        const varNull = null;
+        const varObject = {nome: 'Mouse', preco: 50};
+        const varArray = [1, 'dois', true];
+
+        document.getElementById('pString').innerText = 'Tipo String: ' + typeof varString;
+        document.getElementById('pNumber').innerText = 'Tipo Number: ' + typeof varNumber;
+        document.getElementById('pBoolean').innerText = 'Tipo Boolean: ' + typeof varBoolean;
+        document.getElementById('pUndefined').innerText = 'Tipo Undefined: ' + typeof varUndefined;
+        document.getElementById('pNull').innerText = 'Tipo Null: ' + typeof varNull;
+        document.getElementById('pObject').innerText = 'Tipo Object: ' + typeof varObject;
+        document.getElementById('pArray').innerText = 'Tipo Array: ' + typeof varArray;
+    }
+</script>
+
+</html>

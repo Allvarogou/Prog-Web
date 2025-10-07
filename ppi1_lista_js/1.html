@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O que é JavaScript?</title>
+</head>
+<body>
+    <h1 id="title">O que é JavaScript?</h1>
+    <p id="1">O JavaScript surgiu em 1995, em um contexto onde a Web era construída apenas com HTML e, no máximo, CSS, tornando as páginas estáticas, sem interatividade e com uma experiência de navegação limitada e pouco atraente.</p>
+    <p id="2">O JavaScript é tipicamente executado no lado do cliente (browser) por meio de interpretadores específicos (como V8 ou SpiderMonkey). 
+        Contudo, com o surgimento do Node.js em 2009, o código JS também passou a ser usado no backend (servidor) para responder ao cliente</p>
+    <p id="3">O código JavaScript é interpretado pelo navegador dentro de um ambiente de execução que lhe permite interagir com o HTML e CSS através da Árvore DOM.
+         Esse ambiente é isolado por meio do objeto global window, limitando o acesso do script a recursos externos do sistema.</p>
+    <p id="4">O ambiente de execução do JavaScript é representado pelo objeto global window. Dentro dele, temos objetos chave como document (que representa a Árvore DOM) , 
+        alert() (que exibe uma caixa de diálogo) e console (que representa o console JS, usado para debug via console.log()).</p>
+
+        <p id="horatual"></p>
+        
+</body>
+<script>
+    // CRIAÇÃO E USO DE VARIÁVEL GLOBAL (Objeto Date)
+    // 1. Cria um objeto Date para capturar a hora e a data atuais do sistema.
+    // Usamos 'const' para garantir que esta variável não seja alterada.
+    const dataObjeto = new Date(); 
+
+    // E. REGISTRO NO CONSOLE (Objeto Global console)
+    // 2. Utiliza o método 'log' do objeto 'console' para registrar uma mensagem no console do navegador (útil para debug).
+    console.log('Pagina Carregada...'); 
+
+    // F. ALERTA NA TELA (Objeto Global alert)
+    // 3. Utiliza a função 'alert()' (que pertence ao objeto 'window') para exibir uma caixa de diálogo na tela.
+    alert('Hello World');
+
+    // G. MANIPULAÇÃO DO DOM (Objeto Global document)
+    
+    // 4. Busca o elemento no DOM (Document Object Model) que possui o ID 'horatual'.
+    // Este elemento é o alvo onde a hora será escrita.
+    const elementoHora = document.getElementById('horatual'); 
+
+    // 5. Usa a propriedade '.innerHTML' do elemento HTML
+    // para inserir o valor da hora formatada (dataObjeto.toLocaleTimeString()) dentro do parágrafo.
+    elementoHora.innerHTML = 'A hora atual é: ' + dataObjeto.toLocaleTimeString();
+</script>
+</html>
