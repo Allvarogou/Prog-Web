@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Tópicos de Desenvolvimento Web</title>
+    <style>
+        :root {
+            --cor-principal: #007bff;
+            --cor-secundaria: #6c757d;
+            --cor-de-fundo: #f8f9fa;
+            --cor-do-texto: #343a40;
+            --cor-enfase: #28a745;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            color: var(--cor-do-texto);
+            background-color: var(--cor-de-fundo);
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--cor-principal);
+        }
+
+        .page-container {
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: var(--cor-principal);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.8em;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .topics-grid {
+            display: grid;
+            gap: 20px;
+            padding: 0;
+            list-style: none;
+        }
+
+        .topic-card {
+            background-color: white;
+            border: 1px solid var(--cor-secundaria);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .topic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            border-color: var(--cor-enfase);
+        }
+
+        .topic-card h2 {
+            margin-top: 0;
+            color: var(--cor-principal);
+            border-bottom: 2px solid var(--cor-principal);
+            padding-bottom: 5px;
+            font-size: 1.4em;
+        }
+
+        .topic-card p {
+            flex-grow: 1;
+        }
+
+        .topic-card a {
+            align-self: flex-start;
+            padding: 8px 15px;
+            background-color: var(--cor-enfase);
+            color: white;
+            border-radius: 5px;
+            text-transform: uppercase;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        footer {
+            background-color: var(--cor-secundaria);
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 20px;
+        }
+
+        @media screen and (min-width: 1025px) {
+            .topics-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media screen and (min-width: 600px) and (max-width: 1024px) {
+            .topics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media screen and (max-width: 599px) {
+            .topics-grid {
+                grid-template-columns: 1fr;
+            }
+            header h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <header>
+            <h1>Dashboard de Estudos Web</h1>
+            <p>Links rápidos para os seus tópicos de desenvolvimento.</p>
+        </header>
+
+        <main>
+            <ul class="topics-grid">
+                <li class="topic-card">
+                    <h2>HTML</h2>
+                    <p>Estrutura fundamental da Web. Define o conteúdo e a organização semântica da página.</p>
+                    <a href="#html">Ver Conteúdo</a>
+                </li>
+                <li class="topic-card">
+                    <h2>CSS</h2>
+                    <p>Folhas de Estilo em Cascata. Responsável por toda a apresentação visual e estética do site.</p>
+                    <a href="#css">Ver Conteúdo</a>
+                </li>
+                <li class="topic-card">
+                    <h2>WEB (Geral)</h2>
+                    <p>Conceitos de desenvolvimento, protocolos, navegadores e funcionamento geral da internet.</p>
+                    <a href="#web">Ver Conteúdo</a>
+                </li>
+                <li class="topic-card">
+                    <h2>Flexbox</h2>
+                    <p>Modelo de layout unidimensional para organizar e alinhar itens em uma única linha ou coluna.</p>
+                    <a href="#flexbox">Ver Conteúdo</a>
+                </li>
+                <li class="topic-card">
+                    <h2>Grid</h2>
+                    <p>Modelo de layout bidimensional (linhas e colunas) poderoso, ideal para estruturas de página complexas.</p>
+                    <a href="#grid">Ver Conteúdo</a>
+                </li>
+                <li class="topic-card">
+                    <h2>Position</h2>
+                    <p>Propriedade CSS que controla o posicionamento dos elementos (static, relative, absolute, fixed, sticky).</p>
+                    <a href="#position">Ver Conteúdo</a>
+                </li>
+                <li class="topic-card">
+                    <h2>Animate (Animações)</h2>
+                    <p>Uso de CSS Transitions e Keyframes para criar efeitos de movimento e transformações visuais.</p>
+                    <a href="#animate">Ver Conteúdo</a>
+                </li>
+            </ul>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Estudos Web. Layout 100% Responsivo.</p>
+        </footer>
+    </div>
+</body>
+</html>

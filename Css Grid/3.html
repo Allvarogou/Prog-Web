@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layout Responsivo - Main Content Maior</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        .container > div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 10px;
+        }
+
+        .header { background-color: #ffc107; }
+        .banner { background-color: #dc3545; }
+        .left-aside { background-color: #28a745; }
+        .right-aside { background-color: #ffc107; }
+        .main-content { background-color: #007bff; color: white; }
+        .low-content { background-color: #28a745; }
+        .footer { background-color: #004085; }
+
+
+        .container {
+            display: grid;
+            width: 100%;
+            height: 100%;
+            gap: 5px;
+            padding: 5px;
+            box-sizing: border-box;
+
+            grid-template-areas:
+                "Topo Topo Topo"
+                "Lateral-Especial Area-Meio Lateral-Extra"
+                "Lateral-Especial Area-Principal Lateral-Extra"
+                "Lateral-Especial Area-Principal Lateral-Extra" /* Linha repetida para Main Content maior */
+                "Lateral-Especial Sub-Rodape Lateral-Extra"
+                "Base Base Base";
+
+            /* Colunas: Left (1 parte), Conteúdo (6 partes), Right (1 parte) */
+            grid-template-columns: 1fr 6fr 1fr;
+            
+            /* Linhas: Header, Banner, Main, Main, Low Content, Footer. Main Content tem 2 linhas (2fr) */
+            grid-template-rows: auto auto 2fr auto auto auto;
+        }
+
+        .header { grid-area: Topo; }
+        .banner { grid-area: Area-Meio; }
+        .left-aside { grid-area: Lateral-Especial; }
+        .right-aside { grid-area: Lateral-Extra; }
+
+        .main-content {
+            /* Ocupa duas linhas da área */
+            grid-area: Area-Principal / Area-Principal / span 2 / Area-Principal; 
+            flex-direction: column;
+        }
+        .low-content { grid-area: Sub-Rodape; }
+        .footer { grid-area: Base; }
+
+
+        @media screen and (max-width: 768px) {
+            .container {
+                grid-template-areas:
+                    "H"
+                    "B"
+                    "L"
+                    "M"
+                    "R"
+                    "C"
+                    "F";
+                
+                grid-template-columns: 1fr;
+                /* Main Content (M) agora tem a maior proporção (2fr) no mobile também */
+                grid-template-rows: auto auto auto 2fr auto auto auto; 
+            }
+
+            .header { grid-area: H; }
+            .banner { grid-area: B; }
+            .left-aside { grid-area: L; }
+            .main-content { grid-area: M; }
+            .right-aside { grid-area: R; }
+            .low-content { grid-area: C; }
+            .footer { grid-area: F; }
+            
+            .main-content {
+                height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">Header</div>
+        <div class="banner">Banner</div>
+        <div class="left-aside">Left Aside</div>
+        <div class="right-aside">Right Aside</div>
+        <div class="main-content">
+            <div>Main Content</div>
+            <div>Maior Proporção Aplicada</div>
+        </div>
+        <div class="low-content">Low Content</div>
+        <div class="footer">Footer</div>
+    </div>
+</body>
+</html>
