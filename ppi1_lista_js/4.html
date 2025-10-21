@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora IMC</title>
+    <style>
+        body{
+            font-family: Arial, sans-serif; /* Define a fonte padrão : Arial senão usar sans-serif*/
+            margin: 20px; /* Adiciona uma margem */
+            }
+
+        .container{
+        background-color: white;
+        max-width: 400px; /* Define a largura máxima do contêiner*/
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15); /*Chat gepetesco*/
+          }
+
+        label, input, button{
+            display: block; /*Faz com que os elementos se organixem na vertical, preenchendo toda a horizontal do container.*/
+            margin-bottom: 10px; /* Adiciona um espaçamento inferior entre os elementos */
+        }
+
+        input[type="text"], input[type="number"]{
+            width: 100%; /* Faz com que os campos de entrada ocupem toda a largura disponível dentro do contêiner */
+            padding: 8px; /* Adiciona um espaçamento interno aos campos de entrada */
+            box-sizing: border-box; /* Garante que o padding e a borda sejam incluídos na largura total do elemento */
+        }
+
+        button{
+            padding: 10px 15px; 
+            background-color: #8424d3; /* Define a cor de fundo do botão */
+            color: white; 
+            border: none; 
+            border-radius: 4px; 
+            cursor: pointer; /* Muda o cursor para indicar que o botão é clicável */
+        }    
+        
+        button:hover{  /* Estilização da interação: cor do botão ao passar o mouse */
+            background-color: #6b1aa8;
+        }
+
+        #imgPerfil{
+           display: none;
+           max-width: 100px;
+           margin-top: 20px;
+        }
+
+        #classificacao{
+            margin-top: 20px;
+            font-weight: bold; /*Deixa com efeito negrito*/
+        }
+    </style>
+</head>
+<body>
+    <h1>Calculadora IMC</h1>
+    <div class="container">
+        
+        <label for="nome">Nome:</label> 
+        <input type="text" id="nome" placeholder=""> 
+
+        <label for="peso">Peso:</label> 
+        <input type="number" id="peso" step="0.1" placeholder="Ex. 70"> 
+
+        <label for="altura">Altura:</label> 
+        <input type="number" id="altura" step="0.1" placeholder="Ex. 1.70 ou 1,70">
+
+        <button id="btnCalcular">Calcular IMC</button>
+        
+        <h3>Resultados:</h3>
+   
+        <p id="resultadoIMC">IMC: </p>
+        <p id="classificacao">Classificação:</p>
+        <img id="imgPerfil" src="" alt="Imagem de Perfil">
+    </div>
+    <script>
+        document.getElementById('btnCalcular').addEventListener('click', calcularIMC); // Adiciona um ouvinte de evento ao botão para chamar a função calcularIMC quando clicado
+        function calcularIMC() {
+
+            const nome = document.getElementById('nome').value;
+            const peso = parseFloat(document.getElementById('peso').value);
+            const altura = parseFloat(document.getElementById('altura').value);
+
+            const resultadoIMC = document.getElementById('resultadoIMC');
+            const classificacaoP = document.getElementById('classificacao');
+            const imgPerfil = document.getElementById('imgPerfil');
+            
+            
+           if (!nome || isNaN(peso) || isNaN(altura) || peso <= 0 || altura <= 0) {
+                 alert('Por favor, preencha todos os campos com valores válidos.');
+                 resultadoIMC.innerText = "IMC: ";
+                 classificacaoP.innerText = "Classificação: ";
+                 imgPerfil.style.display = 'none';
+                 return;
+            }
+            
+            const imc = peso / (altura * altura);
+
+            resultadoIMC.innerText = "IMC de " + nome + ": " + imc.toFixed(2);
+
+            let classificacaoTexto = '';
+            let imagemSrc = '';
+
+         if (imc < 18.5) { 
+                classificacaoTexto = "Abaixo do peso";
+            } else if (imc < 24.9) { 
+                classificacaoTexto = "Peso normal";
+            } else if (imc < 29.9) { 
+                classificacaoTexto = "Sobrepeso";
+            } else if (imc < 34.9) { 
+                classificacaoTexto = "Obesidade grau 1";
+            } else if (imc < 39.9) { 
+                classificacaoTexto = "Obesidade grau 2";
+            } else { 
+                classificacaoTexto = "Obesidade grau 3 (mórbida)";
+            }
+
+            classificacaoP.innerText = "Classificação: " + classificacaoTexto;
+
+            switch (classificacaoTexto) {
+                case "Abaixo do peso":
+                    imagemSrc = "magro.png";
+                    break; 
+                case "Peso normal":
+                    imagemSrc = "normal.png";
+                    break;
+                case "Sobrepeso":
+                    imagemSrc = "sobrepeso.png";
+                    break;
+                case "Obesidade grau 1":
+                    imagemSrc = "obeso1.png";
+                    break;
+                case "Obesidade grau 2":
+                    imagemSrc = "obeso2.png";
+                    break;
+                case "Obesidade grau 3 (mórbida)":
+                    imagemSrc = "obeso3.png";
+                    break;
+                default:
+                    imagemSrc = "";
+            }
+            imgPerfil.src = `Imagens/${imagemSrc}`;;
+            imgPerfil.alt = classificacaoTexto;
+            imgPerfil.style.display = 'block';
+           
+        }
+    </script>
+</body>
+</html>
