@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de números</title>
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 20px;
+            background-color: rgb(54, 54, 54);
+            color: white;
+        }
+
+        .container{
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color:  rgb(54, 54, 54);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.548);
+        }
+
+        label, input, button {
+            display: block;
+            margin-bottom: 10px;
+            background-color: rgb(54, 54, 54);
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #8908df;
+            border-radius: 4px;
+            box-shadow: black;  
+            color: white;
+        }
+
+        button {
+            background-color: #8908df;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #6b1aa8;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+            color: white;
+        }
+</style>
+</head>
+<body>
+    <h1>Gerador de números</h1>
+    <div class="container">
+        <p>Este é um gerador de números aleatórios. Você pode especificar o intervalo e a quantidade de números que deseja gerar.</p>
+        
+        <form id="numberGeneratorForm">
+            <label for="min">Número mínimo:</label>
+            <input type="number" id="min" name="min" required>
+            
+            <label for="max">Número máximo:</label>
+            <input type="number" id="max" name="max" required>
+            
+            <label for="count">Quantidade de números:</label>
+            <input type="number" id="count" name="count" required>
+            
+            <button type="submit">Gerar</button>
+        </form>
+
+        <div id="result"></div>
+
+        <script>
+            document.getElementById('numberGeneratorForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+                
+                const min = parseInt(document.getElementById('min').value);
+                const max = parseInt(document.getElementById('max').value);
+                const count = parseInt(document.getElementById('count').value);
+                const resultDiv = document.getElementById('result');
+                
+                if (min >= max) {
+                    resultDiv.textContent = 'O número mínimo deve ser menor que o máximo.';
+                    return;
+                }
+                
+                if (count <= 0) {
+                    resultDiv.textContent = 'A quantidade de números deve ser maior que zero.';
+                    return;
+                }
+                
+                const numbers = [];
+                for (let i = 0; i < count; i++) {
+                    const randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
+                    numbers.push(randomNum);
+                }
+                
+                resultDiv.textContent = 'Números gerados: ' + numbers.join(', ');
+            });
+        </script>
+
+    </div>
+    
+</body>
+</html>
