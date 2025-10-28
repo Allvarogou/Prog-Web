@@ -1,22 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerador de números</title>
+    <title>Gerador de Números</title>
     <style>
-        body{
+        /* Estilos Dark Mode */
+        body {
             font-family: Arial, Helvetica, sans-serif;
             margin: 20px;
-            background-color: rgb(54, 54, 54);
+            background-color: rgb(24, 24, 24); /* Fundo ainda mais escuro */
             color: white;
         }
 
-        .container{
+        .container {
             max-width: 400px;
             margin: 0 auto;
-            padding: 20px;
-            background-color:  rgb(54, 54, 54);
+            padding: 25px;
+            background-color: rgb(34, 34, 34); /* Cor de fundo do container */
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.548);
         }
@@ -24,18 +25,20 @@
         label, input, button {
             display: block;
             margin-bottom: 10px;
-            background-color: rgb(54, 54, 54);
+            background-color: transparent; /* Alterado para transparente */
         }
 
         input[type="number"] {
             width: 100%;
-            padding: 8px;
+            padding: 10px;
             border: 1px solid #8908df;
             border-radius: 4px;
-            box-shadow: black;  
+            background-color: rgb(44, 44, 44); /* Fundo escuro para input */
             color: white;
+            box-sizing: border-box;
         }
-
+        
+        /* Estilos do botão */
         button {
             background-color: #8908df;
             color: white;
@@ -43,74 +46,153 @@
             border: none;
             border-radius: 4px;
             cursor: pointer;
+            width: 100%;
+            font-weight: bold;
         }
 
         button:hover {
             background-color: #6b1aa8;
         }
-
-        #result {
+        
+        /* Estilo para o último sorteio */
+        #resultado { 
             margin-top: 20px;
             font-weight: bold;
-            color: white;
-        }
-
-        h1 {
+            color: #ff5252; /* Cor de destaque para o resultado */
+            font-size: 1.5em;
             text-align: center;
-            color: white;
+            border-bottom: 2px dashed #8908df;
+            padding-bottom: 10px;
         }
-</style>
+        
+        /* Estilos da lista de histórico */
+        #listaSorteios { list-style: none; padding: 0; margin-top: 15px; }
+        #listaSorteios li { padding: 8px 0; border-bottom: 1px dotted #555; }
+        
+        /* Estilo para destacar a contagem de repetições */
+        .contagem { 
+            font-weight: bold; 
+            color: #4CAF50; /* Verde de destaque */
+            margin-left: 10px; 
+            font-size: 0.9em;
+        }
+    </style>
 </head>
 <body>
-    <h1>Gerador de números</h1>
-    <div class="container">
-        <p>Este é um gerador de números aleatórios. Você pode especificar o intervalo e a quantidade de números que deseja gerar.</p>
-        
-        <form id="numberGeneratorForm">
-            <label for="min">Número mínimo:</label>
-            <input type="number" id="min" name="min" required>
-            
-            <label for="max">Número máximo:</label>
-            <input type="number" id="max" name="max" required>
-            
-            <label for="count">Quantidade de números:</label>
-            <input type="number" id="count" name="count" required>
-            
-            <button type="submit">Gerar</button>
-        </form>
-
-        <div id="result"></div>
-
-        <script>
-            document.getElementById('numberGeneratorForm').addEventListener('submit', function(event) {
-                event.preventDefault();
-                
-                const min = parseInt(document.getElementById('min').value);
-                const max = parseInt(document.getElementById('max').value);
-                const count = parseInt(document.getElementById('count').value);
-                const resultDiv = document.getElementById('result');
-                
-                if (min >= max) {
-                    resultDiv.textContent = 'O número mínimo deve ser menor que o máximo.';
-                    return;
-                }
-                
-                if (count <= 0) {
-                    resultDiv.textContent = 'A quantidade de números deve ser maior que zero.';
-                    return;
-                }
-                
-                const numbers = [];
-                for (let i = 0; i < count; i++) {
-                    const randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
-                    numbers.push(randomNum);
-                }
-                
-                resultDiv.textContent = 'Números gerados: ' + numbers.join(', ');
-            });
-        </script>
-
-    </div>
+    <h1>Sorteio de Números</h1>
     
+    <div class="container">
+        
+        <!-- ELEMENTOS DE INPUT -->
+        <label for="minimo">Valor Mínimo:</label>
+        <input type="number" id="minimo" value="1"> 
+        
+        <label for="maximo">Valor Máximo:</label>
+        <input type="number" id="maximo" value="100">
+        
+        <!-- NOVO CAMPO: Quantidade de Sorteios por Clique -->
+        <label for="quantidade">Quantos números sortear:</label>
+        <input type="number" id="quantidade" value="1" min="1">
+
+        <!-- Botão com ID para o JavaScript -->
+        <button id="btnSortear">Sortear</button>
+        
+        <h2>Último Sorteio:</h2>
+        <!-- ELEMENTO DE RESULTADO CORRIGIDO -->
+        <p id="resultado">---</p>
+        
+        <h2>Histórico:</h2>
+        <!-- ELEMENTO DE LISTA CORRIGIDO -->
+        <ul id="listaSorteios">
+            <!-- Números sorteados aparecerão aqui -->
+        </ul>
+    </div>
+
+    <script>
+              
+        // Array de Objetos (Requisito f): Armazena os números sorteados e suas repetições.
+        let historicoSorteios = [];
+
+     
+        // CORRIGIDO: Associa a função 'sortear' ao clique do botão com ID 'btnSortear'.
+        document.getElementById('btnSortear').addEventListener('click', sortear);
+
+      
+        function sortear() {
+            
+            // 1. Leitura dos inputs (Mínimo, Máximo e Quantidade)
+            const inputMinimo = document.getElementById('minimo');
+            const inputMaximo = document.getElementById('maximo');
+            const inputQuantidade = document.getElementById('quantidade');
+            
+            // Lê e converte para Inteiro.
+            let min = parseInt(inputMinimo.value.replace(',', '.'));
+            let max = parseInt(inputMaximo.value.replace(',', '.'));
+            let quantidade = parseInt(inputQuantidade.value.replace(',', '.'));
+
+            // Validação
+            if (isNaN(min) || isNaN(max)) { min = 1; max = 100; }
+            if (isNaN(quantidade) || quantidade < 1) quantidade = 1;
+            
+            // Normaliza os limites (início <= fim)
+            if (min > max) {
+                [min, max] = [max, min]; 
+                inputMinimo.value = min; 
+                inputMaximo.value = max;
+            }
+
+            let ultimosSorteados = [];
+            
+            // NOVO: Laço de repetição para sortear a quantidade de vezes especificada
+            for (let i = 0; i < quantidade; i++) {
+                 // 2. Geração de Número Aleatório (Requisito c)
+                const numeroSorteado = Math.floor(Math.random() * (max - min + 1)) + min;
+                ultimosSorteados.push(numeroSorteado);
+
+                // 3. Verificação e Atualização do Histórico (Requisito f)
+                const itemExistente = historicoSorteios.find(item => item.numero === numeroSorteado);
+
+                if (itemExistente) {
+                    itemExistente.contagem++;
+                } else {
+                    historicoSorteios.push({ numero: numeroSorteado, contagem: 1 });
+                }
+            }
+
+            // Exibe o último(s) resultado(s)
+            if (ultimosSorteados.length === 1) {
+                document.getElementById('resultado').innerText = ultimosSorteados[0];
+            } else {
+                document.getElementById('resultado').innerText = ultimosSorteados.join(', ');
+            }
+
+
+            // 4. Atualiza a lista exibida na tela (DOM)
+            atualizarListaNaTela();
+        }
+
+        // Requisito e: Função para renderizar o array 'historicoSorteios' no elemento <ul>
+        function atualizarListaNaTela() {
+            const listaUL = document.getElementById('listaSorteios');
+            listaUL.innerHTML = ''; // Limpa o conteúdo atual.
+
+            // Ordena o array pelo número.
+            historicoSorteios.sort((a, b) => a.numero - b.numero);
+
+            // Percorre cada item no array 'historicoSorteios'.
+            historicoSorteios.forEach(item => {
+                const li = document.createElement('li'); // Cria um novo <li>.
+                
+                let texto = `Número sorteado: ${item.numero}`;
+                
+                // Requisito f: Verifica se houve repetição.
+                if (item.contagem > 1) { 
+                    texto += ` <span class="contagem">(${item.contagem} vezes)</span>`;
+                }
+                
+                li.innerHTML = texto; 
+                listaUL.appendChild(li); 
+            });
+        }
+    </script>
 </body>
-</html>
