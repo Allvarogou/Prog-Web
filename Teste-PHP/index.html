@@ -1,11 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Crud Simples</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
+    <h2>Crud Basico</h2>
+    <form id="formCadastro" action="salvar.php" method="post">
+        <label> Nome: </label>
+        <input type="text" name="Nome" id="Nome" required>
+        <label>Idade: </label>
+        <input type="number" name="Idade" id="Idade" required>
+        <button type="Submit">Salvar</button>
+    </form>
+    <br>
+    <a href="listar.php">Ver usuários cadastrados</a>
     
 </body>
 </html>
