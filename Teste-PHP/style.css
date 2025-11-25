@@ -1,0 +1,29 @@
+body{
+    font-family: Arial;
+    background:whitesmoke;
+    padding: 20px;
+}
+
+form{
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    width: 300px;
+}
+
+input, button{
+    width: 100% ;
+    margin-bottom:10px;
+    padding: 8px;
+}
+
+button{
+    background: purple;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover{
+    background: rgb(71, 0, 71);
+}
