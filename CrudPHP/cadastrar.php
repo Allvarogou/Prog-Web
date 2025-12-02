@@ -1,0 +1,1 @@
+Permite criar um novo cadastro.
