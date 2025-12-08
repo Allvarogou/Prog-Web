@@ -1,0 +1,2 @@
+Oque ainda falta fazer: 
+Atualizar, cadastrar, editar excluir, lista
