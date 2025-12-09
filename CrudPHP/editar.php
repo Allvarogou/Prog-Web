@@ -1,13 +1,32 @@
 <?php
-require "banco.php";
+session_start(); 
+if (!isset($_SESSION['logado']) || $_SESSION['logado'] !== true) {
+    header('Location: index.php');
+    exit;
+}
 
-$id = $_GET["id"]; // pega o id da URL
+require "banco.php"; // Dependência essencial
+
+// Pega o id da URL, tratando para evitar Notice
+$id = $_GET["id"] ?? null; 
+
+r
+if (!$id) {
+    header('Location: lista.php');
+    exit;
+}
 
 $sql = $pdo->prepare("SELECT * FROM usuarios WHERE id = :id");
 $sql->bindParam(":id", $id);
 $sql->execute();
 
 $usuario = $sql->fetch(PDO::FETCH_ASSOC);
+
+
+if (!$usuario) {
+    echo "Usuário não encontrado. <br><a href='lista.php'>Voltar à lista</a>";
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -29,6 +48,8 @@ $usuario = $sql->fetch(PDO::FETCH_ASSOC);
 
     <button type="submit">Atualizar</button>
 </form>
+<br>
+<a href='lista.php'>Voltar à lista</a>
 
 </body>
 </html>

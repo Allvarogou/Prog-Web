@@ -1,5 +1,9 @@
 <?php
-
+session_start(); 
+if (!isset($_SESSION['logado']) || $_SESSION['logado'] !== true) {
+    header('Location: index.php');
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -19,6 +23,8 @@
 
     <button type="submit">Salvar</button>
 </form>
+<br>
+<a href='lista.php'>Voltar à lista</a>
 
 </body>
 </html>

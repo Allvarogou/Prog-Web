@@ -1,10 +1,17 @@
 <?php
-require "banco.php";
+session_start(); 
 
-/* busca todos os usuários */
+if (!isset($_SESSION['logado']) || $_SESSION['logado'] !== true) {
+    header('Location: index.php');
+    exit;
+}
+
+require "banco.php"; 
+
+
 $sql = $pdo->query("SELECT * FROM usuarios");
 
-/* fetchAll() retorna uma lista com todos os registros */
+
 $usuarios = $sql->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
@@ -16,7 +23,7 @@ $usuarios = $sql->fetchAll(PDO::FETCH_ASSOC);
 
 <h2>Usuários cadastrados</h2>
 
-<a href="cadastrar.php">Cadastrar novo</a>
+<a href="cadastrar.php">Cadastrar novo</a> | <a href="logout.php">Sair (Logout)</a>
 
 <table border="1" cellpadding="5">
     <tr>
@@ -25,7 +32,7 @@ $usuarios = $sql->fetchAll(PDO::FETCH_ASSOC);
         <th>Ações</th>
     </tr>
 
-    <?php foreach ($usuarios as $u): ?>
+    <?php foreach ($usuarios as $u):  ?>
     <tr>
         <td><?= $u["id"] ?></td>
         <td><?= $u["usuario"] ?></td>

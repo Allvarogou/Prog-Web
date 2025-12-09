@@ -76,13 +76,13 @@
     <h1 id="titulo">Login</h1>
     <div class="container">
 
-        <form action="verificarLogin.php" method="POST" id="formLogin" autocomplete="off"> <!-- Post para enviar dados no php-->
+        <form action="verificarLogin.php" method="POST" id="formLogin" autocomplete="off"> 
         
             <label for="login" >Login:</label> 
             <input type="text" id="login" name="usuario" placeholder="Login"> 
 
             <label for="Senha">Senha:</label> 
-            <input type="password" id="senha" name="senha" step="0.1" placeholder="Senha"> <!--passwd para ocultar senha -->
+            <input type="password" id="senha" name="senha" step="0.1" placeholder="Senha"> 
 
             <button type="Submit" id="btnLogar">Logar</button>
         </form>

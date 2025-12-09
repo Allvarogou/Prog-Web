@@ -1,4 +1,5 @@
 <?php
+
 $pdo = new PDO("sqlite:meubanco.sqlite");
 
 
